@@ -34,7 +34,7 @@ function App() {
       if (currentlySelected[0].name === currentlySelected[1].name){
         setCompletedCount((prev) => prev + 1);
       } else {
-        resetFlippedPokemons(currentlySelected), 2000
+        resetFlippedPokemons(currentlySelected)
       }
     }
   }, 500)
