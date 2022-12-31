@@ -4,22 +4,6 @@ import "./App.css";
 import Pokemons from "./components/Pokemons/Pokemons";
 import pokemonball from "../pokemonball.png";
 
-// const get_pokemon_data = (url) => {
-//   return fetch(url)
-//   .then((response) => response.json())
-// .then((data) => {
-//   const pokemonList = []
-//   for (const pokemon of data.results){
-//     const split_url = pokemon.url.split("/")
-//     const id =  parseInt(split_url.slice(-2))
-//     const image_url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-//     const pokemonData = {name: pokemon.name, id, image: image_url}
-//     pokemonList.push(pokemonData)
-//   }
-// return pokemonList
-// })
-// }
-
 function App() {
   const [pokemonList, setPokemonList] = useState([]);
   const [movesCount, setMovesCount] = useState(0);
@@ -30,7 +14,7 @@ function App() {
   const progressValue = Math.round(completedCount / (pokemonList.length / 2) * 100) + "%"
 
   useEffect(() => {
-    fetch("./src/pokemonData.json")
+    fetch("/pokemonData.json")
       .then((response) => response.json())
       .then((data) => {
         const doubledListData = doubleListItems(data);
