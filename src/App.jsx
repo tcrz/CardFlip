@@ -14,7 +14,7 @@ function App() {
   const progressValue = Math.round(completedCount / (pokemonList.length / 2) * 100) + "%"
 
   useEffect(() => {
-    fetch("/pokemonData.json")
+    fetch("/data.json")
       .then((response) => response.json())
       .then((data) => {
         const doubledListData = doubleListItems(data);
