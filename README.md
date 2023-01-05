@@ -1,5 +1,6 @@
 # CardFlip
 CardFlip is an interactive card-flip matchup game built with React and CSS. 
+[Live Demo](https://cardflip-game.netlify.app/)
 
 ## About the project
 CardFlip is an interactive match-up game. Every card appears twice randomly, the goal is to match the all the pairs.  
