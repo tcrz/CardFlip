@@ -13,34 +13,38 @@ const someList = [
     },
 ]
 
+// Function to randomize the indexes/positions and double list items.
 const doubleListItems = (someList) => {
-    const someListCopy = [...someList]
-    const itemDict = {}
-    const size = someList.length
-    const newList = new Array(size * 2)
+     // Make a copy of the list
+    const listCopy = [...someList]
+    // Dict to count the number of occurances of items
+    const itemCountDict = {}
+    const originalListSize = someList.length
+    // Empty array to hold doubled items
+    const newList = new Array(originalListSize * 2)
     let i = 0
-    while (i < size * 2) {
-        const randIndex = Math.floor(Math.random() * someListCopy.length)
-        if (!itemDict[someListCopy[randIndex].name]){
-            itemDict[someListCopy[randIndex].name] = 0
+    while (i < originalListSize * 2) {
+        // Pick a random index to insert item into
+        const idx = Math.floor(Math.random() * (newList.length))
+        // Pick a random index of an item
+        const randIndex = Math.floor(Math.random() * listCopy.length)
+        // Check if dict does not contain item, add item to dictionary and initialize it to 0
+        if (!itemCountDict[listCopy[randIndex].name]){
+            itemCountDict[listCopy[randIndex].name] = 0
         }
-        if (itemDict[someListCopy[randIndex].name] < 2){
-            itemDict[someListCopy[randIndex].name]++
-            newList[i] = {...someListCopy[randIndex]}
+        // Check if dict contains item and count is less than 2
+        if (itemCountDict[listCopy[randIndex].name] < 2){
+            // If the newList index has already has an item, do nothing. Continue loop.
+            // Else insert item at index and increment the item's occurence in the dictionary
+            if (newList[idx] !== undefined) {
+                continue
+            }
+            newList[idx] = {...listCopy[randIndex]}
+            itemCountDict[listCopy[randIndex].name]++
             i++
         }
-        
     }
     return newList
 }
 
 export default doubleListItems
-// fetch("https://eat-right-api-q5n8.onrender.com/api/v1/recipe")
-//     .then((response)=>response.json())
-//     .then(data => {
-//       console.log(data)
-//       const newList = doubleListItems(data)
-//       console.log(newList)
-//     })
-
-// console.log(doubleListItems(someList))
