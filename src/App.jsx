@@ -16,9 +16,16 @@ function App() {
   const [movesCount, setMovesCount] = useState(0);
   const [completedCount, setCompletedCount] = useState(0);
   const [currentlySelected, setCurrentlySelected] = useState([]);
+  const [pokemonIdsList, setPokemonIdsList] = useState([])
   // const [resetGame, setResetGame] = useState()
 
   const progressValue = Math.round((completedCount / (pokemonList.length / 2)) * 100) + "%";
+
+  const generatePokemonIds = () => setPokemonIdsList([...Array(8).keys()].map(i => Math.floor(Math.random() * 490)))
+
+  useEffect(() => {
+    generatePokemonIds()
+  }, [])
 
    // Fetch details of a pokemon
    const fetchPokemonDetails = async (id) => {
@@ -118,13 +125,15 @@ function App() {
   };
 
   const resetGame = () => {
-
+    generatePokemonIds()
+    setMovesCount(0)
+    setCompletedCount(0)
   }
 
   return (
     <div className="App">
       <div className="game-container">
-        <Stats progressValue={progressValue} completedCount={completedCount} movesCount={movesCount}/>
+        <Stats progressValue={progressValue} completedCount={completedCount} movesCount={movesCount} resetGame={resetGame}/>
         {
           !pokemonQueriesLoaded && 
           <div className="loading-view" style={{borderr: "1px solid", height: "90%", display: "flex", justifyContent: "space-around", alignItems: "center"}}>

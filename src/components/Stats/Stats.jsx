@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Stats = ({progressValue, completedCount, movesCount}) => {
+const Stats = ({progressValue, completedCount, movesCount, resetGame}) => {
   return (
     <div className="menu">
         <div className="pairs-matched">
@@ -16,6 +16,7 @@ const Stats = ({progressValue, completedCount, movesCount}) => {
             <p>Total moves</p>
             <p className="result">{movesCount}</p>
         </div>
+        <button onClick={resetGame}>Reset</button>
     </div>
   )
 }
