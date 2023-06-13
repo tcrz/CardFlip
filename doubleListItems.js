@@ -13,7 +13,7 @@ const someList = [
     },
 ]
 
-// Function to randomize the indexes/positions and double list items.
+// Function to randomize the indexes/positions and double pokemon list items.
 const doubleListItems = (someList) => {
      // Make a copy of the list
     const listCopy = [...someList]
