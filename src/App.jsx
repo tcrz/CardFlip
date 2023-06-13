@@ -7,10 +7,9 @@ import Stats from "./components/Stats/Stats.jsx";
 import { useQueries } from "@tanstack/react-query";
 import axios from "axios";
 
-// Generate a number between 1 and 490 (pokemon ids are set in an autoincrementing order, so a number withiin this range will be a pokemon iD)
-const randomPokemonId = Math.floor(Math.random() * 490)
-// Generate a list of 8 numbers (which are pokemonIds) starting from the randomPokemonId
-const pokemonIdsList = [...Array(8).keys()].map(i => randomPokemonId+1 + i)
+
+// Generate a list of 8 random numbers (which are pokemon Ids) within ranges of 0 - 490
+const pokemonIdsList = [...Array(8).keys()].map(i => Math.floor(Math.random() * 490))
 
 function App() {
   const [pokemonList, setPokemonList] = useState([]);
@@ -118,10 +117,20 @@ function App() {
     setPokemonList(newPokemonList);
   };
 
+  const resetGame = () => {
+
+  }
+
   return (
     <div className="App">
       <div className="game-container">
         <Stats progressValue={progressValue} completedCount={completedCount} movesCount={movesCount}/>
+        {
+          !pokemonQueriesLoaded && 
+          <div className="loading-view" style={{borderr: "1px solid", height: "90%", display: "flex", justifyContent: "space-around", alignItems: "center"}}>
+            <p>Loading...</p>
+          </div>
+        }
         <div>
           <Pokemons
             pokemonList={pokemonList}
