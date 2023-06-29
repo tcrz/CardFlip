@@ -142,13 +142,11 @@ function App() {
           </div>
         }
         {pokemonQueriesLoaded && pokemonQueriesIsSuccess &&
-          <div>
-            <Pokemons
-              pokemonList={pokemonList}
-              setMovesCount={setMovesCount}
-              flipPokemonCard={flipPokemonCard}
-            />
-          </div>
+          <Pokemons
+            pokemonList={pokemonList}
+            setMovesCount={setMovesCount}
+            flipPokemonCard={flipPokemonCard}
+          />
         }
         {/* <button>Reset game</button> */}
       </div>
