@@ -1,6 +1,6 @@
-import "./PokemonItem.css";
+import "./PokemonCard.css";
 
-const PokemonItem = ({
+const PokemonCard = ({
   id,
   name,
   image,
@@ -26,4 +26,4 @@ const PokemonItem = ({
   );
 };
 
-export default PokemonItem;
+export default PokemonCard;

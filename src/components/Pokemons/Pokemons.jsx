@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import PokemonItem from "../PokemonItem/PokemonItem";
+import PokemonItem from "../PokemonItem/PokemonCard";
 import "./Pokemons.css";
 
 const Pokemons = (props) => {

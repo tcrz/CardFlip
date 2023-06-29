@@ -27,8 +27,8 @@ function App() {
     generatePokemonIds()
   }, [])
 
-   // Fetch details of a pokemon
-   const fetchPokemonDetails = async (id) => {
+  // Fetch details of a pokemon
+  const fetchPokemonDetails = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`
     const response = await axios.get(url)
     return response.data
@@ -37,13 +37,13 @@ function App() {
   // console.log(pokemonIdsList)
   const pokemonQueries = useQueries({
     queries: pokemonIdsList.map((id) => {
-        return {
-            queryKey: ['pokemon', id],
-            queryFn: () => fetchPokemonDetails(id),
-            refetchOnWindowFocus: false,
-            staleTime: Infinity,
-            cacheTime: Infinity,
-        }
+      return {
+        queryKey: ['pokemon', id],
+        queryFn: () => fetchPokemonDetails(id),
+        refetchOnWindowFocus: false,
+        staleTime: Infinity,
+        cacheTime: Infinity,
+      }
     })
   },)
 
@@ -60,7 +60,7 @@ function App() {
     //   console.log(err)
     // }
     let pokemonList = [];
-    pokemonQueries.forEach((pokemonData, index)=>{
+    pokemonQueries.forEach((pokemonData, index) => {
       const pokemon = {}
       pokemon.name = pokemonData.data.name;
       pokemon.default_img = pokemonball
@@ -72,7 +72,7 @@ function App() {
     pokemonDetailsList.forEach((pokemon, index) => {
       pokemon.id = index
     })
-    
+
     // console.log("pokemonList:", pokemonList)
   }
 
@@ -133,20 +133,23 @@ function App() {
   return (
     <div className="App">
       <div className="game-container">
-        <Stats progressValue={progressValue} completedCount={completedCount} movesCount={movesCount} resetGame={resetGame}/>
+        <Stats progressValue={progressValue} completedCount={completedCount} movesCount={movesCount} resetGame={resetGame} />
+        {pokemonQueriesLoaded && !pokemonQueriesIsSuccess && <p>An error occurred.</p>}
         {
-          !pokemonQueriesLoaded && 
-          <div className="loading-view" style={{borderr: "1px solid", height: "90%", display: "flex", justifyContent: "space-around", alignItems: "center"}}>
+          !pokemonQueriesLoaded &&
+          <div className="loading-view" style={{ borderr: "1px solid", height: "90%", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
             <p>Loading...</p>
           </div>
         }
-        <div>
-          <Pokemons
-            pokemonList={pokemonList}
-            setMovesCount={setMovesCount}
-            flipPokemonCard={flipPokemonCard}
-          />
-        </div>
+        {pokemonQueriesLoaded && pokemonQueriesIsSuccess &&
+          <div>
+            <Pokemons
+              pokemonList={pokemonList}
+              setMovesCount={setMovesCount}
+              flipPokemonCard={flipPokemonCard}
+            />
+          </div>
+        }
         {/* <button>Reset game</button> */}
       </div>
     </div>

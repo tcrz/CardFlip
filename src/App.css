@@ -3,15 +3,16 @@
   align-items: center;
   width: 100%;
   /* padding: 1em; */
-  min-height: 100vh;
-  /* background: white; */
+  height: 100vh;
+  background: white;
   justify-content: space-around;
 }
 
 .game-container {
   width: 550px;
+  min-width: 250px;
   border: 2px solid rgb(238, 236, 236);;
-  height: 97vh;
+  height: 90%;
   padding: 1em;
   display: flex;
   flex-direction: column;
