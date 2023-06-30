@@ -1,0 +1,50 @@
+.menu {
+  /* border: 1px solid black; */
+  display: flex;
+  gap: 1em;
+  align-items: flex-start;
+  height: 12%;
+  /* border: 1px solid red; */
+}
+
+.menu .pairs-matched, .menu .total-moves {
+  /* border: 1px solid red; */
+  width: 50%;
+  height: 100%;
+}
+
+.total-moves {
+  padding-top:.5em;
+}
+
+.result {
+  font-size: 1.3em;
+  font-weight: 400
+}
+
+.menu button {
+  background-color: #ED5564;
+  border: none;
+  padding: 12px 8px;
+  border-radius: 9px;
+  color: white;
+  width: 30%;
+  cursor: pointer
+}
+
+.progress-div {
+  background-color: rgb(233, 233, 233);
+  border-radius: .5rem;
+  width: 100%;
+  /* margin: 0 0 .5em; */
+  /* border: 1px solid green */
+}
+
+.progress {
+  background-color: rgb(62, 122, 235);
+  height: 7px;
+  border-radius: 1rem;
+  transition: .4s ease;
+  transition-delay: 0.5s;
+  /* width: 90px; */
+}

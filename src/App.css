@@ -3,9 +3,10 @@
   align-items: center;
   width: 100%;
   /* padding: 1em; */
-  min-height: 100vh;
+  height: 100vh;
   background: white;
   justify-content: space-around;
+  overflow: none;
   /* border: 1px solid red; */
   padding: .3em
 }
@@ -14,63 +15,10 @@
   width: 550px;
   min-width: 250px;
   border: 2px solid rgb(238, 236, 236);;
-  height: 100%;
-  padding: 1em;
+  height: 95vh;
+  padding: .5em;
   display: flex;
   flex-direction: column;
   gap: 1.2em
   /* background: yellow */
-}
-
-.menu {
-  /* border: 1px solid black; */
-  display: flex;
-  gap: 1em;
-  align-items: flex-start
-}
-
-.menu .pairs-matched, .menu .total-moves {
-  /* border: 1px solid red; */
-  width: 50%;
-  height: 100%;
-}
-
-.total-moves {
-  padding-top:.5em;
-}
-
-#game-progress {
-  width: 100%
-}
-
-.result{
-  font-size: 1.3em;
-  font-weight: 400
-}
-
-.game-container button {
-  background-color: #ED5564;
-  border: none;
-  padding: 12px 8px;
-  border-radius: 9px;
-  color: white;
-  width: 30%;
-  cursor: pointer
-}
-
-.progress-div {
-  background-color: rgb(233, 233, 233);
-  border-radius: .5rem;
-  width: 100%;
-  /* margin: 0 0 .5em; */
-  /* border: 1px solid green */
-}
-
-.progress {
-  background-color: rgb(62, 122, 235);
-  height: 7px;
-  border-radius: 1rem;
-  transition: .4s ease;
-  transition-delay: 0.5s;
-  /* width: 90px; */
 }

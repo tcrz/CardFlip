@@ -20,3 +20,30 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+p {
+  color: black
+}
+
+
+  /* SCROLL BAR */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background:none;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded
+    /* background: #bababa; */
+    /* border-radius: 10px; */
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a4a3a3;
+  }

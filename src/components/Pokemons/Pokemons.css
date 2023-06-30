@@ -1,14 +1,18 @@
 .pokemons {
     display: grid;
     width: 100%;
+    height: 80%;
+    overflow-y: scroll;
     /* background: green; */
     grid-template-columns: repeat(4,1fr);
     grid-gap: 1em;
+    row-gap: 0;
     /* border: 2px solid white; */
 }
 
 @media (min-width: 280px) and (max-width: 480px) {
     .pokemons {
         grid-template-columns: repeat(2,1fr);
+        row-gap: 1em;
     }
 }
