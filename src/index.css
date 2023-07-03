@@ -38,8 +38,7 @@ p {
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded
-    /* background: #bababa; */
+    background: #dfdfdf;
     /* border-radius: 10px; */
   }
 
