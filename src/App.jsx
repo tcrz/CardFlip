@@ -17,6 +17,7 @@ function App() {
   const [completedCount, setCompletedCount] = useState(0);
   const [currentlySelected, setCurrentlySelected] = useState([]);
   const [pokemonIdsList, setPokemonIdsList] = useState([])
+  const [imgsLoaded, setImgsLoaded] = useState(false)
   // const [resetGame, setResetGame] = useState()
 
   const progressValue = Math.round((completedCount / (pokemonList.length / 2)) * 100) + "%";
@@ -25,6 +26,25 @@ function App() {
 
   useEffect(() => {
     generatePokemonIds()
+  }, [])
+
+  // Preload all images before presenting pokemon cards
+  useEffect(() => {
+    const loadImage = image => {
+      return new Promise((resolve, reject) => {
+        const loadImg = new Image()
+        loadImg.src = image
+       
+        loadImg.onload = () =>
+          setTimeout(() => {
+            resolve(image)
+          }, 10)
+        loadImg.onerror = err => reject(err)
+      })
+    }
+    Promise.all(pokemonList.map(pokemon => loadImage(pokemon.image)))
+      .then(() => setImgsLoaded(true))
+      .catch(err => console.log("Failed to load images", err))
   }, [])
 
   // Fetch details of a pokemon
@@ -49,17 +69,13 @@ function App() {
 
   const pokemonQueriesLoaded = pokemonQueries.every(query => !query.isLoading)
   const pokemonQueriesIsSuccess = pokemonQueries.every(query => query.isSuccess)
-  console.log("pQueries:", pokemonQueries)
+  // console.log("pQueries:", pokemonQueries)
 
   let pokemonDetailsList = [];
   if (pokemonQueriesIsSuccess) {
     console.log("works!")
-    // try {
-    //   const doubledPokemonListData = doubleListItems(pokemonQueries)
-    // } catch(err) {
-    //   console.log(err)
-    // }
     let pokemonList = [];
+    // Create custom pokemon object for each pokemon and add it to pokemonList
     pokemonQueries.forEach((pokemonData, index) => {
       const pokemon = {}
       pokemon.name = pokemonData.data.name;
@@ -68,18 +84,22 @@ function App() {
       pokemon.isFlipped = false
       pokemonList.push(pokemon)
     })
+    // Double pokemon and set it to pokemonDetailsList
     pokemonDetailsList = doubleListItems(pokemonList)
+    // Assign id to each pokemon
     pokemonDetailsList.forEach((pokemon, index) => {
       pokemon.id = index
     })
-
-    // console.log("pokemonList:", pokemonList)
   }
 
+  // set pokemon data to state if queries are successfully fetched
   useEffect(() => {
     setPokemonList(pokemonDetailsList)
   }, [pokemonQueriesIsSuccess])
 
+  // If two pokemon have been selected:
+  // 1. Increase the moves count
+  // 2. if pokemon are the same, increated completed count else reset flipped state
   useEffect(() => {
     if (currentlySelected.length === 2) {
       setMovesCount((prev) => prev + 1);
@@ -113,6 +133,7 @@ function App() {
 
   const resetFlippedPokemons = (SelectedList) => {
     const newPokemonList = [...pokemonList];
+    // Set the flipped property of selected pokemon to false and set the updated list to state
     newPokemonList.forEach((pokemon) => {
       if (
         pokemon.id === SelectedList[0].id ||
@@ -134,14 +155,14 @@ function App() {
     <div className="App">
       <div className="game-container">
         <Stats progressValue={progressValue} completedCount={completedCount} movesCount={movesCount} resetGame={resetGame} />
-        {pokemonQueriesLoaded && !pokemonQueriesIsSuccess && <p>An error occurred.</p>}
+        {pokemonQueriesLoaded && !pokemonQueriesIsSuccess && <p style={{color: "red"}}>An error occurred.</p>}
         {
           !pokemonQueriesLoaded &&
           <div className="loading-view" style={{ borderr: "1px solid", height: "90%", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
             <p>Loading...</p>
           </div>
         }
-        {pokemonQueriesLoaded && pokemonQueriesIsSuccess &&
+        {pokemonQueriesLoaded && pokemonQueriesIsSuccess && imgsLoaded &&
           <Pokemons
             pokemonList={pokemonList}
             setMovesCount={setMovesCount}
